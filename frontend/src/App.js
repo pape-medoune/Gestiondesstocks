@@ -46,9 +46,9 @@ function App() {
           onClick={toggleModal}
         >
           <div className="relative p-4 w-full max-w-2xl md:h-auto">
-            {/* Modal content */}
+          
             <div className="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5" onClick={(e) => e.stopPropagation()}>
-              {/* Modal header */}
+              
               <div className="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Ajouter Produit</h3>
                 <button
@@ -72,7 +72,7 @@ function App() {
                   <span className="sr-only">Close modal</span>
                 </button>
               </div>
-              {/* Modal body */}
+              
               <form action="#">
                 <div className="grid gap-4 mb-4 sm:grid-cols-2">
                   <div>
@@ -169,16 +169,16 @@ function App() {
           <thead className="text-xs ttext-gray-500 uppercase  bg-gray-700">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Product name
+                Nom du produit
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+                Prix
               </th>
               <th scope="col" className="px-6 py-3">
-                Category
+                Description
               </th>
               <th scope="col" className="px-6 py-3">
-                Price
+                Image
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
@@ -192,13 +192,13 @@ function App() {
                 Apple MacBook Pro 17"
               </th>
               <td className="px-6 py-4">
-                Silver
+                Macbook taille 28pouces à vendre
               </td>
               <td className="px-6 py-4">
-                Laptop
+                image ici
               </td>
               <td className="px-6 py-4">
-                $2999
+                
               </td>
               <td className="px-6 py-4 flex gap-4">
                 <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
