@@ -1,11 +1,22 @@
 import React from 'react'
+import bg from './images/bgadminlog.jpg';
+import { useState,useEffect } from 'react';
+
+
 
 function Connecter() {
-  return (
-    <div class="w-full h-screen flex fl text-gray-600 body-font">
 
+    const [fetchElement,setFetchElement] = useState([]);
+
+    
+  return (
+    <div class="overflow-hidden p-10 w-full h-screen md:items-center flex flex-row text-gray-600 body-font">
+
+            <div className='hidden object-cover w-1/2  md:flex'>
+                <img src={bg} alt=""/>
+            </div>
             
-            <div class=" md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
+            <div class=" md:w-1/2 justify-center bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
                 <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Admin Connexion</h2>
                     
                     <div class="relative mb-4">
