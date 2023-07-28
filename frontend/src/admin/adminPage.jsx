@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 // // import {Link} from 'react-router-dom'
 // import {GrUpdate} from 'react-icons/gr'
+import {BiSolidEdit} from 'react-icons/bi'
+import {MdDeleteForever} from 'react-icons/md'
 
 
 function AdminPage() {
@@ -29,15 +31,15 @@ function AdminPage() {
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <Link className="mr-5 hover:text-gray-900">Table de donnée</Link>
           </nav>
-          <button className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Visualiser mes produits
+          <Link to="/" className="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Visualiser mes produits
             <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
-          </button>
+          </Link>
         </div>
       </header>
 
-      <div className=" p-5 relative overflow-x-auto w-1/2 shadow-md sm:rounded-lg">
+      <div className=" p-5 relative overflow-x-auto w-[75%] shadow-md sm:rounded-lg">
         <div className="flex items-center justify-between pb-4">
           <div>
           <button id="defaultModalButton"
@@ -211,14 +213,14 @@ function AdminPage() {
               <td className="px-6 py-4">
                 image ici
               </td>
-              <td className="px-6 py-4 flex gap-4">
+              <td className="px-6 py-4 flex items-center h-full gap-4">
               <div>
           <button id="defaultModalButton"
           data-modal-toggle="defaultModalEdit"
           className="block text-white font-bold bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 -rounded-lg text-sm px-5 py-2.5 text-center "
           type="button"
           onClick={toggleModalEdit}>
-              Edit
+              <BiSolidEdit/>
           </button>
 
       {isModalOpenEdit && (
@@ -320,7 +322,7 @@ function AdminPage() {
                   className="text-white border-2 inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   {/* <GrUpdate size={20} className=''/> */}
-                  Modifier le produit
+                  Modifier le Produit
                 </button>
               </form>
             </div>
@@ -330,7 +332,11 @@ function AdminPage() {
 
             
           </div>
-                <Link href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Del</Link>
+          <button 
+          className="block text-white font-bold bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 -rounded-lg text-sm px-5 py-2.5 text-center "
+          type="button">
+              <MdDeleteForever/>
+          </button>
               </td>
             </tr>
           </tbody>
