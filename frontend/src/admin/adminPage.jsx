@@ -9,6 +9,11 @@ import {MdDeleteForever} from 'react-icons/md'
 
 function AdminPage() {
 
+  // const [fetchElement,setFetchElement] = useState([]);
+  //   const [nomProduit,setNomProduit] = useState();
+  //   const [description,setDescription] = useState();
+  //   const [prix,setPrix] = useState();
+  //   const [image,setImage] = useState();
     const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
   
     const toggleModalEdit = () => {
