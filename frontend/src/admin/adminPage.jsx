@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-// // import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 // import {GrUpdate} from 'react-icons/gr'
 import {BiSolidEdit} from 'react-icons/bi'
 import {MdDeleteForever} from 'react-icons/md'
@@ -179,7 +179,7 @@ function AdminPage() {
           </div>
         </div>
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs ttext-gray-500 uppercase  bg-gray-700">
+          <thead className="text-xs text-gray-500 uppercase  bg-gray-700">
             <tr>
               <th scope="col" className="px-6 py-3">
                 Nom du produit
