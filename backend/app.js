@@ -1,129 +1,62 @@
 const express = require("express");
-const cors = require("cors");
 const mongoClient = require("mongodb").MongoClient;
 const dbName="gestionstock";
 const collectionName = "produits";
-const collectionName2 = "admin";
 const PORT = 4400;
-const mongoUrl="mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1"
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const { serializeInteger } = require("whatwg-url");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:3000', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Les méthodes HTTP autorisées
+  allowedHeaders: ['Content-Type', 'Authorization'] // Les en-têtes autorisés
+}));
 
-mongoClient.connect(mongoUrl,(err,client)=>{
-    if(err)
-    {
-        console.log("Erreur lors de la connexion avec la base de donnée!");
+app.use(bodyParser.json())
+app.use(express.json());
+const connectDB = require("./db.Js");
+const connectToDatabase = require("./db.Js");
+const MongoDB_URI = 'mongodb+srv://medoune:NkfNWT96ROhNKdud@cluster0.fb9utbr.mongodb.net/gestion_des_stocks';
+
+connectToDatabase();
+
+app.get("/affichage", (req, res) => {
+  const collection = mongoose.connection.db.collection(collectionName);
+
+  collection.find({}).toArray((err, results) => {
+    if (err) {
+      console.log("erreur lors de l'affichage", err);
+      res.status(500).json({ error: "Error fetching data" });
+    } else {
+      res.status(200).json(results);
     }
-    else
-    {
-        console.log("Connexion fait, avec succés!");
-        const db = client.db(dbName);
+  });
+});
+
+app.post("/ajout", (req, res) => {
+  const { nom, description, prix } = req.body;
+
+  const image = req.file ? req.file.path : '';
+
+  const collection = mongoose.connection.db.collection(collectionName);
+
+  collection.insertOne({ nom, description, prix, image }, (err, result) => {
+    if (err) {
+      console.log("erreur lors de l'insertion", err);
+      res.status(500).json({ error: "Error inserting data" });
+    } else {
+      res.status(201).json(result.ops[0]);
     }
-})
-
-app.post("/ajout",(req,res)=>{
-
-    const {nomProduit,description,prix,image} = req.body;
-    mongoClient.connect(mongoUrl,(err,client)=>{
-        if(err)
-        {
-            res.send("Nous avons rencontré une erreur lors de la connexion avec votre base de donnée!");
-        }
-
-        const db = client.db(dbName);
-        const collection = db.collection(collectionName);
-
-        collection.insertOne({nomProduit,description,prix,image},(err,resultats)=>{
-            if(err)
-            {
-                res.send("Erreur lors de l'insertion!");
-            }else{
-                const json = json(resultats);
-                res.send(json);
-            }
-
-            client.close();
-        })
-    })});
-
-    app.put("/update:id",(req,res)=>{
-        const {id} = req.params;
-        const {nomProduit,description,prix,image} = req.body;
-        mongoClient.connect(mongoUrl,(err,client)=>{
-            if(err)
-            {
-                res.send("Nous avons rencontré une erreur lors de la connexion avec votre base de donnée!");
-            }
-    
-            const db = client.db(dbName);
-            const collection = db.collection(collectionName);
-    
-            collection.findOneAndUpdate({_id: id},{$set:{nomProduit,description,prix,image}},(err,resultats)=>{
-                if(err)
-                {
-                    res.send("Erreur lors de la mise à jours");
-                }else{
-                    const json = json(resultats);
-                    res.send(json);
-                }
-    
-                client.close();
-            })
-        })
-    }
-    )
-
-    app.delete("/delete:id",(req,res)=>{
-        const {id} = req.params; 
-        mongoClient.connect(mongoUrl,(err,client)=>{
-            if(err)
-            {
-                res.send("Nous avons rencontré une erreur lors de la connexion avec votre base de donnée!");
-            }
-    
-            const db = client.db(dbName);
-            const collection = db.collection(collectionName);
-    
-            collection.findOneAndUpdate({_id: id},{$set:{nomProduit,description,prix,image}},(err,resultats)=>{
-                if(err)
-                {
-                    res.send("Erreur lors de la mise à jours");
-                }else{
-                    const json = json(resultats);
-                    res.send(json);
-                }
-    
-                client.close();
-            })
-        })
-    }
-    )
+  });
+});   
 
 
-    app.get("/admingetid",(req,res)=>{
 
-        mongoClient.connect(mongoUrl,(err,client)=>{
-            if(err)
-            {
-                res.send("Nous avons rencontré une erreur lors de la connexion avec votre base de donnée!");
-            }
-    
-            const db = client.db(dbName);
-            const collection = db.collection(collectionName2);
-    
-            collection.find().toArray((err,resultats)=>{
-                if(err)
-                {
-                    res.send("Erreur lors de l'affichage!");
-                }else{
-                    const json = json(resultats);
-                    res.send(json);
-                }
-    
-                client.close();
-            })
-        })});
+
 app.listen(PORT,()=>{
     console.log("Bonjour Mouhamedoune fall")
 });

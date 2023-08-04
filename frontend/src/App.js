@@ -15,7 +15,7 @@ function App() {
             <Routes>
               <Route path="/" Component={ Home } />
               <Route path="/login" Component={ Connecter } />
-              <Route path="/adminpage" Component={ AdminPage } />
+              <Route path="/adminpage"  Component={ AdminPage } />
             </Routes>
 
         </Router>
