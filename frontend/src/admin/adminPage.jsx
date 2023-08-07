@@ -16,14 +16,18 @@ function AdminPage() {
     const [prix,setPrix] = useState();
     const [image, setImage] = useState(null);
   
-    
+    // const fetchElement = async () =>{
+    //   const response = await fetch ("http://localhost:4400/affichage");
+    //   const data = await response.json();
+  
+    //   setElement(data);
+    // }
   
     const fetchElement = async ()=> {
       try {
         const response = await axios.get('http://localhost:4400/affichage');
-        const data = response.json();
-        setElement(data);
-        console.log('Data received from API:', response.data);
+        setElement(response.data);
+        console.log('Data received from API:', );
       } catch (err) {
         console.log('Error fetching :', err);
       } 
@@ -40,20 +44,28 @@ function AdminPage() {
 
     const creerproduit = async () => {
       try {
-        await fetch("http://localhost:4400/ajout",{
-        method: "POST",
-        headers:{
-          "Content-type" : "application/json",
-        },
-        body: JSON.stringify({nom,description,prix,image}),
-        })
-      fetchElement();
-      alert("Donnée inserer avec succés")
+        const donneesFormulaire = new FormData();
+        donneesFormulaire.append('nom', nom);
+        donneesFormulaire.append('description', description);
+        donneesFormulaire.append('prix', prix);
+        donneesFormulaire.append('image', image);
+    
+        await fetch("http://localhost:4400/ajout", {
+          method: "POST",
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          body: donneesFormulaire,
+        });
+    
+        fetchElement();
+        alert("Donnée insérée avec succès");
       } catch (error) {
-        console.log("Erreur lors de l'insertion :",error)
+        console.error("Erreur lors de l'insertion :", error);
       }
-  
-    } 
+    };
+    
+    
   
     // const maj = async (id)=>{
     //   await fetch(`http://localhost:5400/update/${id}`,{
@@ -275,16 +287,13 @@ function AdminPage() {
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"  key={ele._id}>
               
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                ${ele.nom}
-                <h1>Stop it</h1>
+                {ele.nom}
               </th>
               <td className="px-6 py-4">
-                ${ele.description}
-                <h1>Stop it</h1>
+                {ele.description}
               </td>
               <td className="px-6 py-4">
-                ${ele.prix} 
-                <h1>Stop it</h1>
+                {ele.prix} 
               </td>
               <td className="px-6 py-4">
                 <img
@@ -406,6 +415,7 @@ function AdminPage() {
                   Modifier le Produit
                 </button>
               </form>
+              
             </div>
           </div>
         </div>
