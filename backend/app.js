@@ -73,24 +73,23 @@ app.get('/affichage', async (req, res) => {
 //   });
 // });
 
-app.post("/ajout", (req, res) => {
-  const { nom, description, prix } = req.body;
+app.post('/ajout', async (req, res) => {
+  try {
+    const { nom, description, prix, image } = req.body;
+    const client = await MongoClient.connect(MongoDB_URI);
+    const db = client.db(dbName);
+    const collection = db.collection(collectionName);
 
-  const image = req.file ? req.file.path : '';
+    // Insérer le produit dans la base de données
+    await collection.insertOne({ nom, description, prix, image });
 
-  const collection = mongoose.connection.db.collection(collectionName);
-
-  collection.insertOne({ nom, description, prix, image }, (err, result) => {
-    if (err) {
-      console.log("erreur lors de l'insertion", err);
-      res.status(500).json({ error: "Error inserting data" });
-    } else {
-      res.status(201).json(result.ops[0]);
-    }
-  });
-});   
-
-
+    res.sendStatus(201); // Réponse 201 Created
+    client.close();
+  } catch (error) {
+    console.error('Erreur lors de l\'insertion :', error);
+    res.sendStatus(500); // Réponse 500 Internal Server Error
+  }
+});
 
 
 app.listen(PORT,()=>{

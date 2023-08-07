@@ -53,9 +53,9 @@ function AdminPage() {
         await fetch("http://localhost:4400/ajout", {
           method: "POST",
           headers: {
-            'Content-Type': 'multipart/form-data',
+            'content-Type': 'Application/JSON'
           },
-          body: donneesFormulaire,
+          body: JSON.stringify({nom,description,prix,image}),
         });
     
         fetchElement();
@@ -297,7 +297,7 @@ function AdminPage() {
               </td>
               <td className="px-6 py-4">
                 <img
-                  src={`http://localhost:4400/${ele.image}`}
+                  src={`${ele.image}`}
                   alt={ele.nom}
                   className="w-20 h-20 object-cover rounded-md"
                 />      
