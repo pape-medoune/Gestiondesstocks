@@ -15,6 +15,8 @@ function AdminPage() {
     const [description,setDescription] = useState();
     const [prix,setPrix] = useState();
     const [image, setImage] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(10);
   
     // const fetchElement = async () =>{
     //   const response = await fetch ("http://localhost:4400/affichage");
@@ -82,18 +84,39 @@ function AdminPage() {
     // useEffect({
     //   fetchElement();
     // },[])
+// Pagination Logic
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const currentItems = element.slice(indexOfFirstItem, indexOfLastItem);
 
-    const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
-  
-    const toggleModalEdit = () => {
-      setIsModalOpenEdit(!isModalOpenEdit);
-    };
+const pageNumbers = [];
+for (let i = 1; i <= Math.ceil(element.length / itemsPerPage); i++) {
+  pageNumbers.push(i);
+}
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const renderPageNumbers = pageNumbers.map((number) => (
+  <button
+    key={number}
+    onClick={() => setCurrentPage(number)}
+    className={`px-3 py-2 ${
+      number === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-gray-600'
+    } hover:bg-blue-300 hover:text-white focus:outline-none focus:bg-blue-500 focus:text-white rounded-lg`}
+  >
+    {number}
+  </button>
+));
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+const [isModalOpenEdit, setIsModalOpenEdit] = useState(false);
+
+const toggleModalEdit = () => {
+  setIsModalOpenEdit(!isModalOpenEdit);
+};
+
+const [isModalOpen, setIsModalOpen] = useState(false);
+
+const toggleModal = () => {
+  setIsModalOpen(!isModalOpen);
+};
   return (
     <div className='flex flex-col items-center w-full gap-20'>
       <header className="text-gray-600 body-font w-full">
@@ -280,9 +303,9 @@ function AdminPage() {
               </th>
             </tr>
           </thead>
-          
+           
           <tbody>
-          {element.map((ele)=>(
+          {currentItems.map((ele)=>(
               
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"  key={ele._id}>
               
@@ -433,8 +456,10 @@ function AdminPage() {
               
               ))}
           </tbody>
-          
         </table>
+
+        {/* Pagination */}
+        <div className="mt-4 flex justify-center space-x-2">{renderPageNumbers}</div>
       </div>
     </div>
   );
