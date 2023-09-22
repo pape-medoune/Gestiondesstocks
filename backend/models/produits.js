@@ -1,5 +1,6 @@
 // Require mongoose
 const mongoose = require('mongoose');
+const { boolean } = require('webidl-conversions');
 
 // Définir le schéma du produit
 const produitSchema = new mongoose.Schema({
@@ -14,15 +15,15 @@ const produitSchema = new mongoose.Schema({
   prix: {
     type: Number,
     required: true
-  },
+  }, 
   image: {
-    type: String, // Vous pouvez utiliser le type Buffer si vous souhaitez stocker l'image en tant que données binaires
+    type: String, 
     required: true
   }
 });
 
 // Créer le modèle "Produit" à partir du schéma
-const Produit = mongoose.model('Produit', produitSchema);
+const Produit = mongoose.model('gestionstock', produitSchema);
 
 // Exporter le modèle
 module.exports = Produit;

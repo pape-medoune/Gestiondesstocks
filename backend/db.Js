@@ -1,15 +1,9 @@
 const mongoose = require("mongoose");
 
-async function connectToDatabase(err,client) {
-    try {
-      await mongoose.connect('mongodb+srv://medoune:NkfNWT96ROhNKdud@cluster0.fb9utbr.mongodb.net/gestion_des_stocks', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
-      console.log('Connecté à la base de données MongoDB !');
-    } catch (error) {
-      console.error('Erreur de connexion à la base de données :', error);
-    }
+ function connectToDatabase(err,client) {
+    mongoose.connect('mongodb://127.0.0.1:27017/gestionstock')
+    .then(()=>{console.log("Connectionn reuissit!");})
+    .catch(err=>{console.log(err);})
   }
 
   module.exports = connectToDatabase;
