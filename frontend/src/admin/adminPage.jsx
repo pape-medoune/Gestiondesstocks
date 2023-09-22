@@ -9,10 +9,10 @@ import { MdDeleteForever } from "react-icons/md";
 
 function AdminPage() {
   const [element, setElement] = useState([]);
-  const [nom, setnom] = useState();
+  const [nomproduit, setNomproduit] = useState();
   const [description, setDescription] = useState();
   const [prix, setPrix] = useState();
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(10);
 
@@ -37,45 +37,56 @@ function AdminPage() {
     fetchElement();
   }, []);
 
-  const creerproduit = () => {
-    axios
-      .post("http://localhost:4400/ajoutproduit", {
-        nom,
-        description,
-        prix,
-        image,
-      })
-      .then((res) => {
-        console.log(res);
-        setElement(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
+  // const creerproduit = ()=>{
+  //   axios.post("http://localhost:4400/ajoutproduit",{nomproduit,description,prix,image})
+  //   .then(res => {
+  //     console.log(res)
+  //     console.log("Data inserted successfully!");
+  //   })
+  //   .catch(err => {
+  //     console.error(err); 
+  //   })
+  // }  
+
+  const creerproduit = async () => {
+    try {
+      // Créez un objet FormData pour envoyer les données du formulaire
+      const donneesFormulaire = new FormData();
+      donneesFormulaire.append('nomproduit', nomproduit);
+      donneesFormulaire.append('description', description);
+      donneesFormulaire.append('prix', prix);
+      donneesFormulaire.append('image', image);
+  
+      // Utilisez l'objet FormData pour envoyer les données
+      const response = await fetch("http://localhost:4400/ajoutproduit", {
+        method: "POST",
+        header:{
+          'Content-Type': 'multipart/form-data',
+        },
+        body: donneesFormulaire, // Utilisez l'objet FormData ici
       });
+  
+      // Vérifiez si la réponse est OK (statut HTTP 200)
+      if (response.ok) {
+        // Convertissez la réponse en JSON
+        const responseData = await response.json();
+  
+        // Utilisez les données renvoyées pour mettre à jour l'état de votre application
+        console.log("Données enregistrées avec succès :", responseData);
+  
+        // Rafraîchissez la liste des éléments après l'insertion réussie
+        fetchElement();
+        alert("Donnée insérée avec succès");
+      } else {
+        // Gérez les erreurs de réponse HTTP ici, si nécessaire
+        console.error("Erreur lors de la réponse HTTP :", response.status);
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'insertion :", error);
+    }
   };
-
-  // const creerproduit = async () => {
-  //   try {
-  //     const donneesFormulaire = new FormData();
-  //     donneesFormulaire.append('nom', nom);
-  //     donneesFormulaire.append('description', description);
-  //     donneesFormulaire.append('prix', prix);
-  //     donneesFormulaire.append('image', image);
-
-  //     await fetch("http://localhost:4400/ajout", {
-  //       method: "POST",
-  //       headers: {
-  //         'content-Type': 'Application/JSON'
-  //       },
-  //       body: JSON.stringify({nom,description,prix,image}),
-  //     });
-
-  //     fetchElement();
-  //     alert("Donnée insérée avec succès");
-  //   } catch (error) {
-  //     console.error("Erreur lors de l'insertion :", error);
-  //   }
-  // };
+  
+  
 
   // const maj = async (id)=>{
   //   await fetch(`http://localhost:5400/update/${id}`,{
@@ -211,7 +222,7 @@ function AdminPage() {
                       </button>
                     </div>
 
-                    <form action="#">
+                    <form action="#" encType="multipart/form-data">
                       <div className="grid gap-4 mb-4 sm:grid-cols-2">
                         <div>
                           <label
@@ -222,11 +233,11 @@ function AdminPage() {
                           </label>
                           <input
                             type="text"
-                            name="nom"
+                            name="nomproduit"
                             id="name"
-                            value={nom}
+                            value={nomproduit}
                             onChange={(e) => {
-                              setnom(e.target.value);
+                              setNomproduit(e.target.value);
                             }}
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                             placeholder="Nom du produit"
@@ -451,7 +462,7 @@ function AdminPage() {
                                   </label>
                                   <input
                                     type="text"
-                                    name="nom"
+                                    name="nomproduit"
                                     id="name"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Nom du produit"
