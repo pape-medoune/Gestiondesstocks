@@ -5,10 +5,9 @@ const express =require('express');
 // const path = require('path');
 // const exphbs = require('express-handlebars');
 const bodyparser = require('body-parser');
+const MongoClient = require("mongodb").MongoClient;
 
-const route = require("./Routes/routers.js");
-
-
+const client = new MongoClient("mongodb://127.0.0.1:27017/gestionstock");
 
 const productController =require('./controllers/productController');
 
@@ -48,7 +47,48 @@ app.use(bodyparser.json());
 
 app.use(express.json());
 
-app.use("/",route);
+app.get('/display', (req, res) => {
+  const dbname = 'gestionstock';
+  const dbn = client.db(dbname);
+
+  dbn
+    .collection('produits')
+    .find()
+    .toArray()
+    .then((result) => {
+      console.log("L'affichage s'est fait avec succès");
+      // Send the result as a response to the client
+      res.json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      // Handle the error and send an error response if necessary
+      res.status(500).json({ error: 'An error occurred' });
+    });
+});
+
+app.post("/add",(req,res)=>{
+  const dbname = 'gestionstock';
+  const dbn = client.db(dbname);
+
+  const {nomproduit,description,prix,image} = req.body;
+
+  console.log(req.body);
+  dbn
+    .collection('produits')
+    .insertOne({nomproduit,description,prix,image})
+    .then((result) => {
+      console.log("L'insertion s'est fait avec succès");
+   
+      res.json(result); 
+      res.redirect('/orders')
+    })
+    .catch((err)=>{
+      console.log("Erreur lors de l'insertion: "+err);
+    })
+    
+})
+
 
 
 app.listen(4400,()=>{

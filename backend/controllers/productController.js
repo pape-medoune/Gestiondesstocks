@@ -36,20 +36,7 @@ function insertProduct(req, res) {
 
 function displayProduct(req, res) {
  
-    const dbname = "gestionstock";
-    const dbn = client.db(dbname);
-    dbn
-      .collection("produits")
-      .find()
-      .toArray()
-      .then((err, result) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("L'affichage s'est fait avec succés");
-          res.send(result);
-        }
-      }); 
+    
 }
 
 // router.get('/',(req,res)=>{
@@ -77,26 +64,25 @@ function displayProduct(req, res) {
 //         }
 //     })
 // }
-// function insertProduct(req, res) {
-//   // Create a new instance of the Product model
-//   const newProduct = new products({
-//     nomproduit: req.body.nom,
-//     description: req.body.description,
-//     prix: req.body.prix,
-//     image: req.body.image,
-//   });
-// console.log(newProduct);
-//   // Save the new product to the database
-// //   newProduct.save()
-// //     .then(result => {
-// //       console.log("Insertion réussie :", result);
-// //       res.status(201).json(result); // Respond with the saved product
-// //     })
-// //     .catch(err => {
-// //       console.error("Erreur lors de l'insertion :", err);
-// //       res.status(500).json({ error: 'Erreur lors de l\'insertion' }); // Respond with an error
-// //     });
-// }
+function insertProduct(req, res) {
+  // Create a new instance of the Product model
+  const newProduct = new products({
+    nomproduit: req.body.nom,
+    description: req.body.description,
+    prix: req.body.prix,
+    image: req.body.image,
+  });
+console.log(newProduct); 
+  newProduct.save()
+    .then(result => {
+      console.log("Insertion réussie :", result);
+      res.status(201).json(result); // Respond with the saved product
+    })
+    .catch(err => {
+      console.error("Erreur lors de l'insertion :", err);
+      res.status(500).json({ error: 'Erreur lors de l\'insertion' }); // Respond with an error
+    });
+}
 
 // router.get('/list',(req,res)=>{
 //  //   res.json('from list');
