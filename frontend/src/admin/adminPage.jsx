@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // import {Link} from 'react-router-dom'
 // import {GrUpdate} from 'react-icons/gr'
 import { BiSolidEdit } from "react-icons/bi";
-import axios from "axios";
+// import axios from "axios";
 import { MdDeleteForever } from "react-icons/md";
 
 function AdminPage() {
@@ -17,120 +17,46 @@ function AdminPage() {
   const [itemsPerPage] = useState(10);
 
   // const fetchElement = async () =>{
-  //   const response = await fetch ("http://localhost:4400/affichage");
+  //   const response = await fetch ("http://localhost:4400/diplay");
   //   const data = await response.json();
 
   //   setElement(data);
   // }
 
-  const fetchElement = async () => {
-    try {
-      const response = await axios.get("http://localhost:4400/lesproduits");
-      setElement(response.data);
-      console.log("Data received from API:");
-    } catch (err) {
-      console.log("Error fetching :", err);
-    }
-  };
+  // const fetchElement = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4400/display");
+  //     setElement(response.data);
+  //     console.log("Data received from API:");
+  //   } catch (err) {
+  //     console.log("Error fetching :", err);
+  //   }
+  // };
+
+  
+  const fetchElement = async () =>{
+    const response = await fetch ("http://localhost:4400/display");
+    const data = await response.json();
+
+    setElement(data);
+  }
 
   useEffect(() => {
     fetchElement();
   }, []);
 
-  // const creerproduit = ()=>{
-  //   axios.post("http://localhost:4400/ajoutproduit",{nomproduit,description,prix,image})
-  //   .then(res => {
-  //     console.log(res)
-  //     console.log("Data inserted successfully!");
-  //   })
-  //   .catch(err => {
-  //     console.error(err); 
-  //   })
-  // }  
 
+  const createElement = async () => {
+    await fetch("http://localhost:4400/add",{
+      method: "POST",
+      headers:{
+        "Content-type" : "application/json",
+      },
+      body: JSON.stringify({nomproduit ,description,prix,image}),
+    })
+    fetchElement();
 
-  // const creerproduit =  () => {
-
-  //    axios.post("http://localhost:4400/add_product",{nomproduit,description,prix,image})
-  //   .then(res => {
-  //     console.log(res);
-  //     console.log("Data inserted successfully");
-  //   })
-  //   .catch((err) => {
-  //     console.error("L'erreur :"+err); 
-  //     console.log("Data not inserted ");
-  //   },)
-  //   // try {
-  //   //   // Créez un objet FormData pour envoyer les données du formulaire
-  //   //   const donneesFormulaire = new FormData();
-  //   //   donneesFormulaire.append('nomproduit', nomproduit);
-  //   //   donneesFormulaire.append('description', description);
-  //   //   donneesFormulaire.append('prix', prix);
-  //   //   donneesFormulaire.append('image', image);
-  
-  //   //   // Utilisez l'objet FormData pour envoyer les données
-  //   //   const response = await fetch("http://localhost:4400/ajoutproduit", {
-  //   //     method: "POST",
-  //   //     header:{
-  //   //       'Content-Type': 'multipart/form-data',
-  //   //     },
-  //   //     body: donneesFormulaire, // Utilisez l'objet FormData ici
-  //   //   });
-  
-  //   //   // Vérifiez si la réponse est OK (statut HTTP 200)
-  //   //   if (response.ok) {
-  //   //     // Convertissez la réponse en JSON
-  //   //     const responseData = await response.json();
-  
-  //   //     // Utilisez les données renvoyées pour mettre à jour l'état de votre application
-  //   //     console.log("Données enregistrées avec succès :", responseData);
-  
-  //   //     // Rafraîchissez la liste des éléments après l'insertion réussie
-  //   //     fetchElement();
-  //   //     alert("Donnée insérée avec succès");
-  //   //   } else {
-  //   //     // Gérez les erreurs de réponse HTTP ici, si nécessaire
-  //   //     console.error("Erreur lors de la réponse HTTP :", response.status);
-  //   //   }
-  //   // } catch (error) {
-  //   //   console.error("Erreur lors de l'insertion :", error);
-  //   // }
-  // };
-  
-  
-
-  // const maj = async (id)=>{
-  //   await fetch(`http://localhost:5400/update/${id}`,{
-  //     method:"PUT",
-  //     headers:{
-  //       'content-Type': 'Application/JSON'
-  //     },
-  //     body: JSON.stringify({nom,description,prix,image}),
-  //   })
-  //   fetchElement();
-
-  // }
-
-  // useEffect({
-  //   fetchElement();
-  // },[])
-
-  const creerproduit = async () => {
-    try {
-      const response = await axios.post("http://localhost:4400/add_product", {
-        nomproduit,
-        description,
-        prix,
-        image,
-      });
-      
-      console.log(response);
-      console.log("Data inserted successfully");
-    } catch (error) {
-      console.error("L'erreur :", error);
-      console.log("Data not inserted");
-    }
-  };
+  } 
   
 
   // Pagination Logic
@@ -263,7 +189,7 @@ function AdminPage() {
                           </label>
                           <input
                             type="text"
-                            name="nomproduit"
+                            name="nom"
                             id="name"
                             value={nomproduit}
                             onChange={(e) => {
@@ -339,7 +265,7 @@ function AdminPage() {
                       <button
                         type="submit"
                         className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                        onClick={creerproduit}
+                        onClick={createElement}
                       >
                         <svg
                           className="mr-1 -ml-1 w-6 h-6"
@@ -419,14 +345,14 @@ function AdminPage() {
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {ele.nomproduit}
+                  {ele.nom}
                 </th>
                 <td className="px-6 py-4">{ele.description}</td>
                 <td className="px-6 py-4">{ele.prix}</td>
                 <td className="px-6 py-4">
                   <img
                     src={ele.image}
-                    alt={ele.nomproduit}
+                    alt={ele.nom}
                     className="w-20 h-20 object-cover rounded-md"
                   />
                 </td>
@@ -492,7 +418,7 @@ function AdminPage() {
                                   </label>
                                   <input
                                     type="text"
-                                    name="nomproduit"
+                                    name="nom"
                                     id="name"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     placeholder="Nom du produit"
