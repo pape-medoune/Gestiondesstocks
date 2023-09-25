@@ -48,43 +48,54 @@ function AdminPage() {
   //   })
   // }  
 
-  const creerproduit = async () => {
-    try {
-      // Créez un objet FormData pour envoyer les données du formulaire
-      const donneesFormulaire = new FormData();
-      donneesFormulaire.append('nomproduit', nomproduit);
-      donneesFormulaire.append('description', description);
-      donneesFormulaire.append('prix', prix);
-      donneesFormulaire.append('image', image);
+
+  // const creerproduit =  () => {
+
+  //    axios.post("http://localhost:4400/add_product",{nomproduit,description,prix,image})
+  //   .then(res => {
+  //     console.log(res);
+  //     console.log("Data inserted successfully");
+  //   })
+  //   .catch((err) => {
+  //     console.error("L'erreur :"+err); 
+  //     console.log("Data not inserted ");
+  //   },)
+  //   // try {
+  //   //   // Créez un objet FormData pour envoyer les données du formulaire
+  //   //   const donneesFormulaire = new FormData();
+  //   //   donneesFormulaire.append('nomproduit', nomproduit);
+  //   //   donneesFormulaire.append('description', description);
+  //   //   donneesFormulaire.append('prix', prix);
+  //   //   donneesFormulaire.append('image', image);
   
-      // Utilisez l'objet FormData pour envoyer les données
-      const response = await fetch("http://localhost:4400/ajoutproduit", {
-        method: "POST",
-        header:{
-          'Content-Type': 'multipart/form-data',
-        },
-        body: donneesFormulaire, // Utilisez l'objet FormData ici
-      });
+  //   //   // Utilisez l'objet FormData pour envoyer les données
+  //   //   const response = await fetch("http://localhost:4400/ajoutproduit", {
+  //   //     method: "POST",
+  //   //     header:{
+  //   //       'Content-Type': 'multipart/form-data',
+  //   //     },
+  //   //     body: donneesFormulaire, // Utilisez l'objet FormData ici
+  //   //   });
   
-      // Vérifiez si la réponse est OK (statut HTTP 200)
-      if (response.ok) {
-        // Convertissez la réponse en JSON
-        const responseData = await response.json();
+  //   //   // Vérifiez si la réponse est OK (statut HTTP 200)
+  //   //   if (response.ok) {
+  //   //     // Convertissez la réponse en JSON
+  //   //     const responseData = await response.json();
   
-        // Utilisez les données renvoyées pour mettre à jour l'état de votre application
-        console.log("Données enregistrées avec succès :", responseData);
+  //   //     // Utilisez les données renvoyées pour mettre à jour l'état de votre application
+  //   //     console.log("Données enregistrées avec succès :", responseData);
   
-        // Rafraîchissez la liste des éléments après l'insertion réussie
-        fetchElement();
-        alert("Donnée insérée avec succès");
-      } else {
-        // Gérez les erreurs de réponse HTTP ici, si nécessaire
-        console.error("Erreur lors de la réponse HTTP :", response.status);
-      }
-    } catch (error) {
-      console.error("Erreur lors de l'insertion :", error);
-    }
-  };
+  //   //     // Rafraîchissez la liste des éléments après l'insertion réussie
+  //   //     fetchElement();
+  //   //     alert("Donnée insérée avec succès");
+  //   //   } else {
+  //   //     // Gérez les erreurs de réponse HTTP ici, si nécessaire
+  //   //     console.error("Erreur lors de la réponse HTTP :", response.status);
+  //   //   }
+  //   // } catch (error) {
+  //   //   console.error("Erreur lors de l'insertion :", error);
+  //   // }
+  // };
   
   
 
@@ -103,6 +114,25 @@ function AdminPage() {
   // useEffect({
   //   fetchElement();
   // },[])
+
+  const creerproduit = async () => {
+    try {
+      const response = await axios.post("http://localhost:4400/add_product", {
+        nomproduit,
+        description,
+        prix,
+        image,
+      });
+      
+      console.log(response);
+      console.log("Data inserted successfully");
+    } catch (error) {
+      console.error("L'erreur :", error);
+      console.log("Data not inserted");
+    }
+  };
+  
+
   // Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -222,7 +252,7 @@ function AdminPage() {
                       </button>
                     </div>
 
-                    <form action="#" encType="multipart/form-data">
+                    <form action="#" encType="multipart/form-data" method="POST">
                       <div className="grid gap-4 mb-4 sm:grid-cols-2">
                         <div>
                           <label
