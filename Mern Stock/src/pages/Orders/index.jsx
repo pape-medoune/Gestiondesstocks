@@ -3,7 +3,7 @@ import DashboardHeader from "../../components/DashboardHeader";
 import { BiSolidEdit } from "react-icons/bi";
 import axios from "axios";
 import { MdDeleteForever } from "react-icons/md";
-import "../styles.css";
+import "../styles.css"; 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -144,7 +144,7 @@ function Orders() {
                   <img
                     src={require(`../../assets/imagesProduits/${ele.image}`)}
                     alt={ele.nom}
-                    className="w-20 h-20 object-cover rounded-md"
+                    className="w-20 h-20 cover rounded-md"
                   />
                 </td>
 
@@ -200,8 +200,8 @@ function Orders() {
                             </div>
 
                             <form 
-                              encType="multipart/form-data"
-                              method="put"
+                              encType="multipart/form-data" 
+                              onSubmit={(e) => e.preventDefault()}
                             >
                               <div className="grid gap-4 mb-4 sm:grid-cols-2"> 
                                 <div>
@@ -290,7 +290,7 @@ function Orders() {
                               <button
                                 type="submit"
                                 className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                onClick={ () => {maj(ele._id)}}
+                                 onClick={() => maj(ele._id)}
                               >
                                 <svg
                                   className="mr-1 -ml-1 w-6 h-6"
