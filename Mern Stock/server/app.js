@@ -81,14 +81,17 @@ const upload = multer({
 app.put("/maj", upload.single("image"), (req, res) => {
   const dbName = "gestionstock";
   const collectionName = "produits";
-  // // const id = req.query.id; 
   const dbn = client.db(dbName);
+  
+  // Debugging: Log request parameters and body
+  console.log("Request parameters (id):", req.query.id);
+  console.log("Request body:", req.body);
+  
   const { nomproduit, description, prix } = req.body;
   const image = req.file ? req.file.filename : null;
-  console.log(req.query.id);
-  console.log(req.body);
+
   dbn.collection(collectionName).findOneAndUpdate(
-    { _id: req.params.id },
+    { _id: new ObjectId(req.query.id) },
     {
       $set: {
         nomproduit,
@@ -98,15 +101,25 @@ app.put("/maj", upload.single("image"), (req, res) => {
       },
     }
   )
-    .then((result) => { 
-        console.log("La mise à jour s'est faite avec succès!");
-        res.json({ message: "Update successful" }); 
-    })
-    .catch((err) => {
-      console.log("Erreur lors de la mise à jour du produit : " + err);
-      res.status(500).json({ error: "An error occurred during the update." });
-    });
+  .then((result) => {
+    // Debugging: Log the result of the update operation
+    console.log("Update result:", result);
+
+    if (result.value) {
+      console.log("La mise à jour s'est faite avec succès!");
+      res.json({ message: "Update successful" });
+    } else {
+      console.log("Aucun produit trouvé pour la mise à jour.");
+      res.status(404).json({ error: "Product not found for update." });
+    }
+  })
+  .catch((err) => {
+    // Debugging: Log any errors that occur
+    console.log("Erreur lors de la mise à jour du produit:", err);
+    res.status(500).json({ error: "An error occurred during the update." });
+  });
 });
+
 
 
 app.post("/add", upload.single("image"), (req, res) => {
