@@ -63,6 +63,21 @@ app.get('/display', (req, res) => {
     });
 });
 
+app.delete("/delete",(req,res)=>{
+  const dbName = "gestionstock";
+  const collectionName = "produits";
+  const dbn = client.db(dbName);
+  const id = req.query.id;
+  console.log("Deleting Fait avec succés");
+
+  dbn.collection(collectionName).findOneAndDelete({_id: new ObjectId(req.query.id)})
+  .then(()=>{
+    console.log("Deleting Fait avec succés")
+  })
+  .catch((err)=>{
+    console.log("Produit non trouvé! "+err)
+  })
+});
 
 const photo = multer.diskStorage({
   destination: function (req, file, cb) {

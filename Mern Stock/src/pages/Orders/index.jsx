@@ -91,6 +91,16 @@ function Orders() {
     setIsModalOpenEdit(!isModalOpenEdit);
   };
 
+  const supprimerProduit = (id)=>{
+    axios.delete(`http://localhost:4400/delete?id=${id}`)
+    .then(res => {
+      console.log("Success supp");
+    })
+    .catch(err => {
+      console.error("Amna erreur !"+err); 
+    })
+  }
+
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
   // const toggleModal = () => {
@@ -201,7 +211,13 @@ function Orders() {
 
                             <form 
                               encType="multipart/form-data" 
-                              onSubmit={(e) => e.preventDefault()}
+                              onSubmit=
+                              {(e) => 
+                                {
+                                  e.preventDefault();
+                                  notifyInfo()
+                                }
+                              }
                             >
                               <div className="grid gap-4 mb-4 sm:grid-cols-2"> 
                                 <div>
@@ -307,6 +323,7 @@ function Orders() {
                                 Modifier le produit
                               </button>
                             </form>
+                            <ToastContainer />
                           </div>
                         </div>
                       </div>
@@ -314,7 +331,7 @@ function Orders() {
                   </div>
                   <button
                     className="block text-white font-bold bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 -rounded-lg text-sm px-5 py-2.5 text-center "
-                    type="button"
+                    type="button" onClick={()=>{supprimerProduit(ele._id)}}
                   >
                     <MdDeleteForever />
                   </button>

@@ -35,7 +35,7 @@ function DashboardHeader({ btnText, onClick }) {
 
   const notify = ()=>{
     // Set to 3sec
-    toast.success('Produit L\'ajout fait avec succés', {autoClose:3000})
+    toast.success('Produit L\'ajout fait avec succés', {autoClose:4000})
     // .then(()=>console.log("notify affiché successfully!"))
     // .catch((err)=>console.log("Erreur notify!"))
     

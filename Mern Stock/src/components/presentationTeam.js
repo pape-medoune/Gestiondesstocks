@@ -1,6 +1,7 @@
 import React from 'react'
 import me from '../assets/images/me.jpg'
 import './team.css'
+import {DiGithubAlt} from 'react-icons/di' 
 import {useEffect,useRef} from 'react';
 import {TweenMax,Power3} from 'gsap';
 
@@ -139,7 +140,7 @@ useEffect(()=>{
 
 
 return (
-    <section className="py-14">
+    <section className="py-7 h-screen bg-gray-300">
         <div className='flex justify-center text-[6.5vw]'>
             <span ref={El=>bigTitleSpan1=El} className='slogan'>S</span>
             <span ref={El=>bigTitleSpan2=El} className='slogan'>A</span>
@@ -162,9 +163,9 @@ return (
                 </p>
             </div>
             <div className="mt-12">
-                <ul className="grid gap-8 sm:grid-cols-2 md:grid-cols-3">
+                <ul className="grid gap-8  sm:grid-cols-2 md:grid-cols-3">
 
-                            <li ref={El=>card1=El} >
+                            <li className='shadow-lg p-2 rounded-lg ' ref={El=>card1=El} >
                                 <div className="w-full h-60 sm:h-52 md:h-56 overflow-hidden">
                                     <img
                                         src={me}
@@ -172,12 +173,17 @@ return (
                                         alt=""
                                     />
                                 </div>
-                                <div className="mt-4">
+                                <div className="mt-4 flex items-center justify-between">
+                                    <div>
                                     <h4 className="text-lg text-gray-700 font-semibold">Mouhamedoune Fall</h4>
                                     <p className="text-indigo-600">Developper Full Stack and Mobile</p>
+                                    </div>
+                                    <div>
+                                      <a href='https://github.com/pape-medoune'><DiGithubAlt className='p-3 rounded-xl shadow-md text-white bg-gray-500' size={50}/></a>
+                                    </div>
                                 </div>
                             </li>
-                            <li ref={El=>card2=El} >
+                            <li className='shadow-lg p-2 rounded-lg' ref={El=>card2=El} >
                                 <div className="w-full h-60 sm:h-52 md:h-56 overflow-hidden">
                                     <img
                                         src={me}
@@ -185,12 +191,17 @@ return (
                                         alt=""
                                     />
                                 </div>
-                                <div className="mt-4">
+                                <div className="mt-4 flex items-center justify-between">
+                                    <div>
                                     <h4 className="text-lg text-gray-700 font-semibold">Mouhamedoune Fall</h4>
                                     <p className="text-indigo-600">Developper Full Stack and Mobile</p>
+                                    </div>
+                                    <div>
+                                      <a href='https://github.com/pape-medoune'><DiGithubAlt className='p-3 rounded-xl shadow-md text-white bg-gray-500' size={50}/></a>
+                                    </div>
                                 </div>
                             </li>
-                            <li ref={El=>card3=El} >
+                            <li className='shadow-lg p-2 rounded-lg' ref={El=>card3=El} >
                                 <div className="w-full h-60 sm:h-52 md:h-56 overflow-hidden">
                                     <img
                                         src={me}
@@ -198,9 +209,14 @@ return (
                                         alt=""
                                     />
                                 </div>
-                                <div className="mt-4">
+                                <div className="mt-4 flex items-center justify-between">
+                                    <div>
                                     <h4 className="text-lg text-gray-700 font-semibold">Mouhamedoune Fall</h4>
                                     <p className="text-indigo-600">Developper Full Stack and Mobile</p>
+                                    </div>
+                                    <div>
+                                      <a href='https://github.com/pape-medoune'><DiGithubAlt className='p-3 rounded-xl shadow-md text-white bg-gray-500' size={50}/></a>
+                                    </div>
                                 </div>
                             </li>
                 </ul>
