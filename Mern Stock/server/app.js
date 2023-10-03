@@ -6,6 +6,9 @@ const bodyparser = require('body-parser');
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require('mongodb').ObjectId;
 const client = new MongoClient("mongodb://127.0.0.1:27017/gestionstock");
+const session = require('express-session');
+
+
 
 const multer = require('multer');
 
@@ -157,6 +160,31 @@ app.post("/add", upload.single("image"), (req, res) => {
       console.log("Erreur lors de l'insertion: "+err);
     });
 });
+
+app.use(session({
+  secret: 'votre_secret', // Une chaîne secrète pour signer les cookies de session
+  resave: false,
+  saveUninitialized: true,
+}));
+
+const verification = (req,res,next)=>{
+  if(!req.session.user)
+  {
+    return res.redirect("/login");
+  }
+  next();
+}
+
+//Se connecter en tant qu'admin 
+app.post("/login",verification,(req,res)=>{
+
+})
+
+//S'inscrire en tant que admin 
+app.post("inscription",(req,res)=>{
+
+})
+
 
 app.listen(4400,()=>{
     console.log('Express server started at port : 4400');
