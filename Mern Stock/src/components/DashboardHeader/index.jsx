@@ -225,14 +225,7 @@ function DashboardHeader({ btnText, onClick }) {
           </div>
         </div>
       )}
-      <ToastContainer />
-      <div className="dashbord-header-right">
-        <img
-          className="dashbord-header-avatar"
-          src="https://reqres.in/img/faces/9-image.jpg"
-          alt="avatar"
-        />
-      </div>
+      <ToastContainer /> 
     </div>
   );
 }

@@ -161,28 +161,51 @@ app.post("/add", upload.single("image"), (req, res) => {
     });
 });
 
-app.use(session({
-  secret: 'votre_secret', // Une chaîne secrète pour signer les cookies de session
-  resave: false,
-  saveUninitialized: true,
-}));
+// app.use(session({
+//   secret: ''Mouhamedoune, 
+//   resave: false,
+//   saveUninitialized: true,
+// }));
 
-const verification = (req,res,next)=>{
-  if(!req.session.user)
-  {
-    return res.redirect("/login");
-  }
-  next();
-}
+// const verification = (req,res,next)=>{
+//   if(!req.session.user)
+//   {
+//     return res.redirect("/login");
+//   }
+//   next();
+// }
 
-//Se connecter en tant qu'admin 
-app.post("/login",verification,(req,res)=>{
+// //Se connecter en tant qu'admin 
+// app.get("/login",verification,(req,res)=>{
+//   const {username,password} = req.body;
+//   const dbn = client.db("gestionstock");
+//   const collectionName = "adminusers";
 
-})
+//   dbn.collection(collectionName).find({})
+//   .then(()=>{
+
+//   })
+//   .catch(()=>{
+    
+//   })
+// })
+
 
 //S'inscrire en tant que admin 
 app.post("inscription",(req,res)=>{
+  const passwordHash = bcrypt.hashSync(req.body.password, 10);
 
+        const {prenom,nom ,username} = req.body;
+        const dbn = client.db("gestionstock");
+        const collectionName = "adminusers";
+      
+        dbn.collection(collectionName).insertOne({prenom,nom,username,passwordHash})
+        .then(data =>{
+            res.send("Donnée inserer avec succés!");
+        })
+        .catch(err =>{
+            console.log(err);
+        })
 })
 
 
