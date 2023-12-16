@@ -336,6 +336,7 @@ function Orders() {
                       className="block text-white font-bold bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 -rounded-lg text-sm px-5 py-2.5 text-center "
                       type="button"
                       onClick={() => {
+                        
                         supprimerProduit(ele._id);
                       }}
                     >

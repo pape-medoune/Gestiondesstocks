@@ -1,5 +1,5 @@
 import React from "react";
-import me from "../assets/images/me.jpg";
+import me from "../assets/images/me.jpeg";
 import "./team.css";
 import { DiGithubAlt } from "react-icons/di";
 import { useEffect, useRef } from "react";
@@ -138,9 +138,9 @@ function Team() {
   }, []);
 
   return (
-    <section className=" h-screen flex flex-row bg-gray-300 ">
+    <section className=" h-screen flex flex-row ">
       <SideBar menu={sidebar_menu} />
-      <div class="flex flex-col w-full ">
+      <div class="flex flex-col w-full  h-screen justify-between">
         <div className="flex justify-center text-[6.5vw]">
           <span ref={(El) => (bigTitleSpan1 = El)} className="slogan">
             S
@@ -171,9 +171,8 @@ function Team() {
             K
           </span>
         </div>
-        <div className="max-w-screen-xl mx-auto px-4 md:px-8">
-          <div className="max-w-xl mx-auto sm:text-center">
-            <h3
+        <div className="max-w-xl mx-auto sm:text-center">
+            <h3 
               ref={(El) => (secondTitle = El)}
               className="text-gray-800 text-3xl font-semibold sm:text-4xl"
             >
@@ -183,99 +182,73 @@ function Team() {
               Composition de notre équipe !
             </p>
           </div>
-          <div className="mt-12">
-            <ul className="grid gap-8  sm:grid-cols-2 md:grid-cols-3">
-              <li
-                className="shadow-lg p-2 rounded-lg "
-                ref={(El) => (card1 = El)}
-              >
-                <div className="w-full h-60 sm:h-52 md:h-56 overflow-hidden">
-                  <img
-                    src={me}
-                    className="w-full transition hover:scale-110 ease-in-out delay-200  h-full object-cover object-center shadow-md rounded-xl"
-                    alt=""
-                  />
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <div>
-                    <h4 className="text-lg text-gray-700 font-semibold">
-                      Mouhamedoune Fall
-                    </h4>
-                    <p className="text-indigo-600">
-                      Developper Full Stack and Mobile
+        <div className="max-w-screen-xl mx-auto md:px-8">
+          
+          <div className="">
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div
+                  className="w-full bg-white shadow-lg hover:shadow-md  rounded-lg p-12 flex flex-col justify-center items-center"
+                  ref={(El) => (card1 = El)}
+                >
+                  <div className="mb-8">
+                    <img
+                      className="object-center object-cover rounded-full h-36 w-36"
+                      src={me}
+                      alt="photo"
+                    />
+                  </div>
+                  <div className="text-center">
+                    <p className="text-xl text-gray-700 font-bold mb-2">
+                      Issakha Cissé
+                    </p>
+                    <p className="text-base text-gray-400 font-normal">
+                      Développeur full stack web et mobile
                     </p>
                   </div>
-                  <div>
-                    <a href="https://github.com/pape-medoune">
-                      <DiGithubAlt
-                        className="p-3 rounded-xl shadow-md text-white bg-gray-500"
-                        size={50}
-                      />
-                    </a>
+                </div>
+                <div
+                  className="w-full bg-white shadow-lg hover:shadow-md  rounded-lg p-12 flex flex-col justify-center items-center"
+                  ref={(El) => (card2 = El)}
+                >
+                  <div className="mb-8">
+                    <img
+                      className="object-center object-cover rounded-full h-36 w-36"
+                      src={me}
+                      alt="photo"
+                    />
                   </div>
-                </div>
-              </li>
-              <li
-                className="shadow-lg p-2 rounded-lg"
-                ref={(El) => (card2 = El)}
-              >
-                <div className="w-full h-60 sm:h-52 md:h-56 overflow-hidden">
-                  <img
-                    src={me}
-                    className="w-full transition hover:scale-110 ease-in-out delay-200  h-full object-cover object-center shadow-md rounded-xl"
-                    alt=""
-                  />
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <div>
-                    <h4 className="text-lg text-gray-700 font-semibold">
+                  <div className="text-center">
+                    <p className="text-xl text-gray-700 font-bold mb-2">
                       Mouhamedoune Fall
-                    </h4>
-                    <p className="text-indigo-600">
-                      Developper Full Stack and Mobile
+                    </p>
+                    <p className="text-base text-gray-400 font-normal">
+                      Développeur full stack web et mobile
                     </p>
                   </div>
-                  <div>
-                    <a href="https://github.com/pape-medoune">
-                      <DiGithubAlt
-                        className="p-3 rounded-xl shadow-md text-white bg-gray-500"
-                        size={50}
-                      />
-                    </a>
+                </div>
+                <div
+                  className="w-full bg-white shadow-lg hover:shadow-md rounded-lg p-12 flex flex-col justify-center items-center"
+                  ref={(El) => (card3 = El)}
+                >
+                  <div className="mb-8">
+                    <img
+                      className="object-center object-cover rounded-full h-36 w-36"
+                      src="https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1176&q=80"
+                      alt="photo"
+                    />
                   </div>
-                </div>
-              </li>
-              <li
-                className="shadow-lg p-2 rounded-lg"
-                ref={(El) => (card3 = El)}
-              >
-                <div className="w-full h-60 sm:h-52 md:h-56 overflow-hidden">
-                  <img
-                    src={me}
-                    className="w-full transition hover:scale-110 ease-in-out delay-200  h-full object-cover object-center shadow-md rounded-xl"
-                    alt=""
-                  />
-                </div>
-                <div className="mt-4 flex items-center justify-between">
-                  <div>
-                    <h4 className="text-lg text-gray-700 font-semibold">
-                      Mouhamedoune Fall
-                    </h4>
-                    <p className="text-indigo-600">
-                      Developper Full Stack and Mobile
+                  <div className="text-center">
+                    <p className="text-xl text-gray-700 font-bold mb-2">
+                      Omar Boune K. Thiam 
+                    </p>
+                    <p className="text-base text-gray-400 font-normal">
+                      Developpeur Web
                     </p>
                   </div>
-                  <div>
-                    <a href="https://github.com/pape-medoune">
-                      <DiGithubAlt
-                        className="p-3 rounded-xl shadow-md text-white bg-gray-500"
-                        size={50}
-                      />
-                    </a>
-                  </div>
                 </div>
-              </li>
-            </ul>
+              </div>
+            </section>
           </div>
         </div>
       </div>
