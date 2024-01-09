@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Icon from "./images/pic.jpg";
+import { ToastContainer, toast } from "react-toastify";
 import axios from 'axios'
 
 function Login() {
@@ -44,11 +45,12 @@ function Login() {
 
       console.log(response);
       const { accessToken } = response.data;
-      window.alert("Vous vous etes connecté avec succés !")
+      toast.success("Vous vous etes connecté avec succés !")
       localStorage.setItem("access-token", accessToken);
       navigate("/teams", { replace: true });
     } catch (err) {
       console.error(err); 
+      toast.success("Erreur lors de la connexion ")
     }
   };
  
@@ -145,6 +147,7 @@ function Login() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </main>
   );
 }

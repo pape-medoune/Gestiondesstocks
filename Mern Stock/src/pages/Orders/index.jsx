@@ -82,8 +82,10 @@ function Orders() {
 
       console.log(response.data);
       setElement(response.data);
+      toast.success('Contenue modifié avec succés');
     } catch (err) {
       console.error("Error: " + err);
+      toast.error('Erreur lors de la modification ');
     }
   };
 
@@ -99,9 +101,11 @@ function Orders() {
         .delete(`http://localhost:4400/delete?id=${id}`)
         .then((res) => {
           console.log("Success supp");
+          toast.success(` Produit  supprimé avec succés `);
         })
         .catch((err) => {
           console.error("Amna erreur !" + err);
+          toast.error(`Erreur lors de la suppression du produit`);
         })
     );
   };
@@ -326,8 +330,7 @@ function Orders() {
                                   </svg>
                                   Modifier le produit
                                 </button>
-                              </form>
-                              <ToastContainer />
+                              </form> 
                             </div>
                           </div>
                         </div>
@@ -353,6 +356,7 @@ function Orders() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -62,7 +62,7 @@ function DashboardHeader({ btnText, onClick }) {
       })
       .catch((err) => {
         console.error("Erreur lors de l'insertion" + err);
-        toast("Erreur lors de l'insertion de votre produit !");
+        toast.error("Erreur lors de l'insertion de votre produit !");
       });
   };
   return (

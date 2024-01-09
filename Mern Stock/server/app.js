@@ -272,7 +272,6 @@ app.post("/register", (req, res) => {
     });
 });
 
-
 app.post("/login", (req, res) => {
   const dbn = client.db("gestionstock");
   const collectionN = dbn.collection("adminusers");
