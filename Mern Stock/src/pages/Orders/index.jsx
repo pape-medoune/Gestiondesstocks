@@ -6,8 +6,7 @@ import { MdDeleteForever } from "react-icons/md";
 import "../styles.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SideBar from "../../components/Sidebar";
-// import SideBar from "./components/Sidebar";
+import SideBar from "../../components/Sidebar";  
 import sidebar_menu from "../../constants/sidebar-menu";
 
 function Orders() {
@@ -115,10 +114,10 @@ function Orders() {
   return (
     <div className="w-full h-fit flex flex-row">
       <SideBar menu={sidebar_menu} />
-      <div>
+      <div className="w-full">
         {" "}
         <DashboardHeader btnText="New Order" />
-        <div className=" w-full">
+        <div className=" w-full flex items-center flex-col ">
           <table className="w-full flex flex-col  text-sm text-left  text-gray-500 dark:text-gray-400">
             <thead className="text-xs flex   text-gray-200 uppercase  bg-gray-700">
               <tr className="w-full dark:bg-sky-800 grid grid-cols-5">
