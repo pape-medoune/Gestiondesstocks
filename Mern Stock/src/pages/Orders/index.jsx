@@ -95,14 +95,16 @@ function Orders() {
   };
 
   const supprimerProduit = (id) => {
-    axios
-      .delete(`http://localhost:4400/delete?id=${id}`)
-      .then((res) => {
-        console.log("Success supp");
-      })
-      .catch((err) => {
-        console.error("Amna erreur !" + err);
-      });
+    window.confirm("Etes vous sur de vouloir supprimer le produit ?").then(
+      axios
+        .delete(`http://localhost:4400/delete?id=${id}`)
+        .then((res) => {
+          console.log("Success supp");
+        })
+        .catch((err) => {
+          console.error("Amna erreur !" + err);
+        })
+    );
   };
 
   // const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,7 +113,7 @@ function Orders() {
   //   setIsModalOpen(!isModalOpen);
   // };
   return (
-    <div className="w-full h-fit  flex flex-row">
+    <div className="w-full h-fit flex flex-row">
       <SideBar menu={sidebar_menu} />
       <div>
         {" "}
@@ -336,7 +338,6 @@ function Orders() {
                       className="block text-white font-bold bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 -rounded-lg text-sm px-5 py-2.5 text-center "
                       type="button"
                       onClick={() => {
-                        
                         supprimerProduit(ele._id);
                       }}
                     >
