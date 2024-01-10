@@ -16,8 +16,8 @@ export default () => {
 
   return (
     <nav className="bg-white border-b w-full md:static md:text-sm md:border-none shadow">
-      <div className="items-center px-4 max-w-screen-x mx-auto md:flex md:px-6">
-        <div className="flex items-center justify-between py-2 md:py-5 md:block">
+      <div className="items-center px-6 max-w-screen-x mx-auto md:flex md:px-6">
+        <div className="flex items-center justify-between py-2 md:py-1 md:block">
           <Link to="/">
             <img
               className="rounded-full"

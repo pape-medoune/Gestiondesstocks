@@ -12,11 +12,11 @@ function Home() {
           <span className="md:text-5xl text-blue-600">SamaStock</span>,
         </p>
         <h1 className="md:text-3xl sm:text-6xl text-4xl font-bold md:py-6">
-          votre boutique en ligne.
+          votre gestionnaire de stock en ligne avec une efficacité votre <span className="text-blue-500 font-bold">stock</span>.
         </h1>
         <div className="flex justify-center items-center">
           <p className="md:text-3xl sm:text-4xl text-xl font-bold text-gray-600 py-4">
-            Nos produits disponibles en stock :
+            Les produits disponibles en stock :
             <TypeAnimation
               sequence={[
                 " Téléphones",
