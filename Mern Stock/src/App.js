@@ -14,8 +14,8 @@ function App() {
         <div className="">
           <Routes>
             <Route path="*" element={<SamaStock />} />
-            <Route path="/teams" element={<PrivateRoutes />}>
-              <Route path="/teams" element={<Team />} />
+            <Route path="/" element={<PrivateRoutes />}>
+              <Route path="/" element={<Team />} />
             </Route>
             <Route path="/orders" element={<PrivateRoutes />}>
               <Route path="/orders" element={<Orders />} />

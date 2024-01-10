@@ -7,19 +7,19 @@ const sidebar_menu = [
   {
     id: 1,
     icon: DashboardIcon,
-    path: "/teams",
+    path: "/",
     title: "Team",
   },
   {
     id: 2,
     icon: ShippingIcon,
     path: "/orders",
-    title: "Gestion des stockages",
+    title: "Gestion des produits",
   },
   {
     id: 3,
     icon: ProductIcon,
-    path: "/",
+    path: "/home",
     title: "Acceder au site web",
   },
   {
